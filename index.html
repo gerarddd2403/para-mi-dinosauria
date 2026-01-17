@@ -48,6 +48,36 @@
             to { transform: translateY(-100vh); opacity: 0; }
         }
     </style>
+    <script>
+    const fotos = ["foto1.jpg", "foto2.jpg"]; // poné aquí tus imágenes
+
+    setInterval(() => {
+        const img = document.createElement("img");
+        const fotoRandom = fotos[Math.floor(Math.random() * fotos.length)];
+        img.src = fotoRandom;
+
+        img.style.position = "absolute";
+        img.style.left = Math.random() * 80 + "vw"; // posición horizontal
+        img.style.bottom = "0";
+        img.style.width = (80 + Math.random() * 50) + "px"; // tamaño aleatorio
+        img.style.borderRadius = "15px";
+        img.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
+        img.style.animation = "subirFoto 8s linear forwards";
+        img.style.zIndex = "500"; // detrás del mensaje, delante del fondo
+
+        document.body.appendChild(img);
+
+        setTimeout(() => img.remove(), 8000); // eliminar después de subir
+    }, 2000); // cada 2 segundos aparece una nueva foto
+</script>
+
+<style>
+@keyframes subirFoto {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+
 </head>
 <body>
 
@@ -97,3 +127,4 @@
 
 </body>
 </html>
+
