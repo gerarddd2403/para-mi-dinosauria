@@ -61,5 +61,39 @@
     <script>
         setInterval(() => {
             const corazon = document.createElement("div");
-            corazon.classList.add
+            corazon.classList.add("corazon");
+            corazon.innerText = "❤️";
 
+            corazon.style.left = Math.random() * 100 + "vw";
+            corazon.style.bottom = "0";
+            corazon.style.fontSize = (20 + Math.random() * 30) + "px";
+
+            document.body.appendChild(corazon);
+
+            setTimeout(() => corazon.remove(), 5000);
+        }, 300);
+    </script>
+
+    <!-- Mensaje letra por letra -->
+    <script>
+        const linea1 = "Felices 35 meses mi reina";
+        const linea2 = "TE AMO ❤️";
+
+        const elem1 = document.getElementById("linea1");
+        const elem2 = document.getElementById("linea2");
+
+        function escribirLinea(texto, elemento, delay = 100) {
+            let i = 0;
+            const intervalo = setInterval(() => {
+                elemento.innerHTML += texto.charAt(i);
+                i++;
+                if (i >= texto.length) clearInterval(intervalo);
+            }, delay);
+        }
+
+        escribirLinea(linea1, elem1, 150);  // primera línea
+        setTimeout(() => escribirLinea(linea2, elem2, 150), linea1.length * 150 + 500);  // segunda línea
+    </script>
+
+</body>
+</html>
