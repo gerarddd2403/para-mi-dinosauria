@@ -14,8 +14,35 @@
 </script>
 
 <style>
-@keyframes subir {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-100vh); opacity: 0; }
-}
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ff5f9e, #ff9acb);
+        font-family: Arial, sans-serif;
+        height: 100vh;
+    }
+
+    .mensaje {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        z-index: 9999; /* MUY IMPORTANTE */
+        text-shadow: 0 0 15px rgba(0,0,0,0.5);
+        pointer-events: none;
+    }
+
+    .mensaje h1 {
+        font-size: 3em;
+        margin: 0;
+    }
+
+    .mensaje h2 {
+        font-size: 2.5em;
+        margin-top: 10px;
+    }
 </style>
+
+
