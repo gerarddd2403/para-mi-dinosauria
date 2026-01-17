@@ -51,7 +51,7 @@
             to { transform: translateY(-100vh); opacity: 0; }
         }
 
-        /* Botón música (obligatorio en móvil) */
+        /* Botón música */
         .btn-musica {
             position: fixed;
             bottom: 20px;
@@ -72,13 +72,12 @@
 </head>
 <body>
 
-    <!-- Música de fondo -->
+    <!-- Música -->
     <audio id="musica" loop>
         <source src="musica.mp3.mpeg" type="audio/mpeg">
-        Tu navegador no soporta audio.
     </audio>
 
-    <!-- Botón para iniciar música -->
+    <!-- Botón -->
     <button id="btnMusica" class="btn-musica">
         ▶️ Toca aquí mi amor ❤️
     </button>
@@ -103,28 +102,21 @@
         }, 300);
     </script>
 
-    <!-- Fotos flotantes -->
+    <!-- Fotos flotantes (MÁS GRANDES) -->
     <script>
         const fotos = [
-            "image.jpeg",
-            "image1.jpeg",
-            "image2.jpeg",
-            "image3.jpeg",
-            "image4.jpeg",
-            "image5.jpeg",
-            "image6.jpeg",
-            "image7.jpeg",
-            "image8.jpeg"
+            "image.jpeg","image1.jpeg","image2.jpeg","image3.jpeg",
+            "image4.jpeg","image5.jpeg","image6.jpeg","image7.jpeg","image8.jpeg"
         ];
 
         setInterval(() => {
             const img = document.createElement("img");
-            const fotoRandom = fotos[Math.floor(Math.random() * fotos.length)];
-            img.src = fotoRandom;
+            img.src = fotos[Math.floor(Math.random() * fotos.length)];
             img.style.position = "absolute";
-            img.style.left = Math.random() * 80 + "vw";
+            img.style.left = Math.random() * 70 + "vw";
             img.style.bottom = "0";
-            img.style.width = (80 + Math.random() * 50) + "px";
+            img.style.width = (150 + Math.random() * 120) + "px"; // MÁS GRANDES
+            img.style.objectFit = "cover"; // evita deformación
             img.style.borderRadius = "15px";
             img.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
             img.style.animation = "subirFoto 8s linear forwards";
@@ -134,37 +126,45 @@
         }, 2000);
     </script>
 
-    <!-- Mensaje letra por letra -->
+    <!-- Texto -->
     <script>
         const linea1 = "Felices 35 meses mi reina";
         const linea2 = "TE AMO ❤️";
 
-        const elem1 = document.getElementById("linea1");
-        const elem2 = document.getElementById("linea2");
-
-        function escribirLinea(texto, elemento, delay = 100) {
+        function escribir(texto, el, delay) {
             let i = 0;
-            const intervalo = setInterval(() => {
-                elemento.innerHTML += texto.charAt(i);
-                i++;
-                if (i >= texto.length) clearInterval(intervalo);
+            const t = setInterval(() => {
+                el.innerHTML += texto.charAt(i++);
+                if (i >= texto.length) clearInterval(t);
             }, delay);
         }
 
-        escribirLinea(linea1, elem1, 150);
-        setTimeout(() => escribirLinea(linea2, elem2, 150), linea1.length * 150 + 500);
+        escribir(linea1, document.getElementById("linea1"), 150);
+        setTimeout(() => escribir(linea2, document.getElementById("linea2"), 150), linea1.length * 150 + 500);
     </script>
 
-    <!-- Script música (MÓVIL + PC) -->
+    <!-- Música con FADE-IN -->
     <script>
-        const btn = document.getElementById("btnMusica");
         const audio = document.getElementById("musica");
+        const btn = document.getElementById("btnMusica");
 
         btn.addEventListener("click", () => {
+            audio.volume = 0;
             audio.play();
             btn.style.display = "none";
+
+            let vol = 0;
+            const fade = setInterval(() => {
+                vol += 0.05;
+                if (vol >= 1) {
+                    vol = 1;
+                    clearInterval(fade);
+                }
+                audio.volume = vol;
+            }, 150);
         });
     </script>
 
 </body>
 </html>
+
