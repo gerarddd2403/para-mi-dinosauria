@@ -12,10 +12,10 @@
             height: 100vh;
         }
 
-        /* Mensaje centrado principal */
+        /* Mensaje principal */
         .mensaje {
             position: fixed;
-            top: 50%;
+            top: 55%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -33,24 +33,24 @@
             margin-top: 10px;
         }
 
-        /* Mensajes frontales */
+        /* Mensajes frontales (más arriba y grandes) */
         .mensaje-frontal {
             position: fixed;
-            top: 50%;
+            top: 25%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
+            transform: translate(-50%, -50%) scale(0.95);
             background: rgba(255,255,255,0.95);
             color: #ff5f9e;
-            padding: 20px 30px;
-            border-radius: 20px;
-            font-size: 20px;
+            padding: 30px 40px;
+            border-radius: 25px;
+            font-size: 28px;
             font-weight: bold;
             text-align: center;
-            max-width: 80%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 85%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
             opacity: 0;
             z-index: 9500;
-            animation: aparecerMensaje 4s ease-in-out forwards;
+            animation: aparecerMensaje 5s ease-in-out forwards;
         }
 
         @keyframes aparecerMensaje {
@@ -151,7 +151,7 @@
         }, 2000);
     </script>
 
-    <!-- MENSAJES DE FRENTE -->
+    <!-- MENSAJES (UNA SOLA VEZ) -->
     <script>
         const mensajesFrontales = [
             "Gracias por todo el amor que me das",
@@ -159,23 +159,26 @@
             "Junto a ti cada momento es mágico"
         ];
 
-        let indiceMensaje = 0;
+        let indice = 0;
 
-        function mostrarMensajeFrontal() {
+        function mostrarMensaje() {
+            if (indice >= mensajesFrontales.length) return;
+
             const m = document.createElement("div");
             m.className = "mensaje-frontal";
-            m.innerText = mensajesFrontales[indiceMensaje];
+            m.innerText = mensajesFrontales[indice];
             document.body.appendChild(m);
 
-            setTimeout(() => m.remove(), 4000);
+            setTimeout(() => m.remove(), 5000);
 
-            indiceMensaje = (indiceMensaje + 1) % mensajesFrontales.length;
+            indice++;
+            setTimeout(mostrarMensaje, 6500);
         }
 
-        setInterval(mostrarMensajeFrontal, 6000);
+        setTimeout(mostrarMensaje, 4000);
     </script>
 
-    <!-- Texto letra por letra -->
+    <!-- Texto principal -->
     <script>
         const linea1 = "Felices 35 meses mi reina";
         const linea2 = "TE AMO ❤️";
@@ -189,7 +192,8 @@
         }
 
         escribir(linea1, document.getElementById("linea1"), 150);
-        setTimeout(() => escribir(linea2, document.getElementById("linea2"), 150), linea1.length * 150 + 500);
+        setTimeout(() => escribir(linea2, document.getElementById("linea2"), 150),
+            linea1.length * 150 + 500);
     </script>
 
     <!-- Música con fade-in -->
