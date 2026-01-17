@@ -56,37 +56,26 @@
     </div>
 
     <script>
-        // --- Corazones ---
-        setInterval(() => {
-            const corazon = document.createElement("div");
-            corazon.classList.add("corazon");
-            corazon.innerText = "❤️";
-            corazon.style.left = Math.random() * 100 + "vw";
-            corazon.style.fontSize = (20 + Math.random() * 30) + "px";
-            document.body.appendChild(corazon);
+    // --- Corazones ---
+    setInterval(() => {
+        const corazon = document.createElement("div");
+        corazon.classList.add("corazon");
+        corazon.innerText = "❤️";
 
-            setTimeout(() => corazon.remove(), 5000);
-        }, 300);
+        corazon.style.position = "absolute";
+        corazon.style.left = Math.random() * 100 + "vw"; // posición horizontal
+        corazon.style.bottom = "0"; // comienza desde abajo
+        corazon.style.fontSize = (20 + Math.random() * 30) + "px";
 
-        // --- Texto letra por letra ---
-        const linea1 = "Felices 35 meses mi reina";
-        const linea2 = "TE AMO ❤️";
+        corazon.style.animation = "subir 5s linear forwards";
 
-        const elem1 = document.getElementById("linea1");
-        const elem2 = document.getElementById("linea2");
+        document.body.appendChild(corazon);
 
-        function escribirLinea(texto, elemento, delay = 100) {
-            let i = 0;
-            const intervalo = setInterval(() => {
-                elemento.innerHTML += texto.charAt(i);
-                i++;
-                if (i >= texto.length) clearInterval(intervalo);
-            }, delay);
-        }
+        setTimeout(() => corazon.remove(), 5000);
+    }, 300);
+</script>
 
-        escribirLinea(linea1, elem1, 150);  // velocidad letra por letra
-        setTimeout(() => escribirLinea(linea2, elem2, 150), linea1.length * 150 + 500);
-    </script>
 
 </body>
 </html>
+
