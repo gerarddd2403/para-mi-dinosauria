@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Felices 35 meses</title>
     <style>
         body {
@@ -20,16 +20,14 @@
             transform: translate(-50%, -50%);
             text-align: center;
             color: white;
-            z-index: 9999; /* Muy arriba, para que los corazones y fotos queden detrás */
+            z-index: 9999;
             text-shadow: 0 0 15px rgba(0,0,0,0.5);
             pointer-events: none;
         }
-
         .mensaje h1 {
             font-size: 3em;
             margin: 0;
         }
-
         .mensaje h2 {
             font-size: 2.5em;
             margin-top: 10px;
@@ -42,7 +40,6 @@
             font-size: 24px;
             animation: subirCorazon 5s linear forwards;
         }
-
         @keyframes subirCorazon {
             from { transform: translateY(0); opacity: 1; }
             to { transform: translateY(-100vh); opacity: 0; }
@@ -59,7 +56,7 @@
 
     <!-- Música de fondo -->
     <audio autoplay loop>
-        <source src="musica.mp3.mpeg" type="audio/mpeg">
+        <source src="musica.mp3" type="audio/mpeg" />
         Tu navegador no soporta audio.
     </audio>
 
@@ -85,7 +82,7 @@
 
     <!-- Fotos flotantes -->
     <script>
-        const fotos = ["foto1.jpg","foto2.jpg"]; // reemplazá con tus fotos
+        const fotos = ["foto1.jpg","foto2.jpg"]; // Poné los nombres de tus fotos aquí
 
         setInterval(() => {
             const img = document.createElement("img");
@@ -98,7 +95,7 @@
             img.style.borderRadius = "15px";
             img.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
             img.style.animation = "subirFoto 8s linear forwards";
-            img.style.zIndex = "500"; // detrás del mensaje
+            img.style.zIndex = "500"; // Detrás del mensaje
             document.body.appendChild(img);
             setTimeout(() => img.remove(), 8000);
         }, 2000);
@@ -127,4 +124,3 @@
 
 </body>
 </html>
-
