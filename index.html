@@ -12,7 +12,7 @@
             height: 100vh;
         }
 
-        /* Mensaje centrado */
+        /* Mensaje centrado principal */
         .mensaje {
             position: fixed;
             top: 50%;
@@ -20,7 +20,7 @@
             transform: translate(-50%, -50%);
             text-align: center;
             color: white;
-            z-index: 9999;
+            z-index: 9000;
             text-shadow: 0 0 15px rgba(0,0,0,0.5);
             pointer-events: none;
         }
@@ -33,10 +33,36 @@
             margin-top: 10px;
         }
 
+        /* Mensajes frontales */
+        .mensaje-frontal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(255,255,255,0.95);
+            color: #ff5f9e;
+            padding: 20px 30px;
+            border-radius: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            max-width: 80%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            opacity: 0;
+            z-index: 9500;
+            animation: aparecerMensaje 4s ease-in-out forwards;
+        }
+
+        @keyframes aparecerMensaje {
+            0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            15%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            85%  { opacity: 1; }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
+        }
+
         /* Corazones */
         .corazon {
             position: absolute;
-            color: rgba(255, 255, 255, 0.9);
             font-size: 24px;
             animation: subirCorazon 5s linear forwards;
         }
@@ -45,7 +71,7 @@
             to { transform: translateY(-100vh); opacity: 0; }
         }
 
-        /* Fotos flotantes */
+        /* Fotos */
         @keyframes subirFoto {
             from { transform: translateY(0); opacity: 1; }
             to { transform: translateY(-100vh); opacity: 0; }
@@ -77,12 +103,11 @@
         <source src="musica.mp3.mpeg" type="audio/mpeg">
     </audio>
 
-    <!-- Botón -->
     <button id="btnMusica" class="btn-musica">
         ▶️ Toca aquí mi amor ❤️
     </button>
 
-    <!-- Mensaje -->
+    <!-- Mensaje principal -->
     <div class="mensaje">
         <h1 id="linea1"></h1>
         <h2 id="linea2"></h2>
@@ -91,18 +116,18 @@
     <!-- Corazones -->
     <script>
         setInterval(() => {
-            const corazon = document.createElement("div");
-            corazon.classList.add("corazon");
-            corazon.innerText = "❤️";
-            corazon.style.left = Math.random() * 100 + "vw";
-            corazon.style.bottom = "0";
-            corazon.style.fontSize = (20 + Math.random() * 30) + "px";
-            document.body.appendChild(corazon);
-            setTimeout(() => corazon.remove(), 5000);
+            const c = document.createElement("div");
+            c.className = "corazon";
+            c.innerText = "❤️";
+            c.style.left = Math.random() * 100 + "vw";
+            c.style.bottom = "0";
+            c.style.fontSize = (20 + Math.random() * 30) + "px";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), 5000);
         }, 300);
     </script>
 
-    <!-- Fotos flotantes (MÁS GRANDES) -->
+    <!-- Fotos -->
     <script>
         const fotos = [
             "image.jpeg","image1.jpeg","image2.jpeg","image3.jpeg",
@@ -115,8 +140,8 @@
             img.style.position = "absolute";
             img.style.left = Math.random() * 70 + "vw";
             img.style.bottom = "0";
-            img.style.width = (150 + Math.random() * 120) + "px"; // MÁS GRANDES
-            img.style.objectFit = "cover"; // evita deformación
+            img.style.width = (150 + Math.random() * 120) + "px";
+            img.style.objectFit = "cover";
             img.style.borderRadius = "15px";
             img.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
             img.style.animation = "subirFoto 8s linear forwards";
@@ -126,7 +151,31 @@
         }, 2000);
     </script>
 
-    <!-- Texto -->
+    <!-- MENSAJES DE FRENTE -->
+    <script>
+        const mensajesFrontales = [
+            "Gracias por todo el amor que me das",
+            "Eres el ritmo que hace latir mi corazón",
+            "Junto a ti cada momento es mágico"
+        ];
+
+        let indiceMensaje = 0;
+
+        function mostrarMensajeFrontal() {
+            const m = document.createElement("div");
+            m.className = "mensaje-frontal";
+            m.innerText = mensajesFrontales[indiceMensaje];
+            document.body.appendChild(m);
+
+            setTimeout(() => m.remove(), 4000);
+
+            indiceMensaje = (indiceMensaje + 1) % mensajesFrontales.length;
+        }
+
+        setInterval(mostrarMensajeFrontal, 6000);
+    </script>
+
+    <!-- Texto letra por letra -->
     <script>
         const linea1 = "Felices 35 meses mi reina";
         const linea2 = "TE AMO ❤️";
@@ -143,7 +192,7 @@
         setTimeout(() => escribir(linea2, document.getElementById("linea2"), 150), linea1.length * 150 + 500);
     </script>
 
-    <!-- Música con FADE-IN -->
+    <!-- Música con fade-in -->
     <script>
         const audio = document.getElementById("musica");
         const btn = document.getElementById("btnMusica");
@@ -153,18 +202,17 @@
             audio.play();
             btn.style.display = "none";
 
-            let vol = 0;
+            let v = 0;
             const fade = setInterval(() => {
-                vol += 0.05;
-                if (vol >= 1) {
-                    vol = 1;
+                v += 0.05;
+                if (v >= 1) {
+                    v = 1;
                     clearInterval(fade);
                 }
-                audio.volume = vol;
+                audio.volume = v;
             }, 150);
         });
     </script>
 
 </body>
 </html>
-
