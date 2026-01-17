@@ -20,7 +20,7 @@
             transform: translate(-50%, -50%);
             text-align: center;
             color: white;
-            z-index: 9999; /* Muy arriba, para que los corazones queden atrás */
+            z-index: 9999; /* Muy arriba, para que los corazones y fotos queden detrás */
             text-shadow: 0 0 15px rgba(0,0,0,0.5);
             pointer-events: none;
         }
@@ -40,46 +40,28 @@
             position: absolute;
             color: rgba(255, 255, 255, 0.9);
             font-size: 24px;
-            animation: subir 5s linear forwards;
+            animation: subirCorazon 5s linear forwards;
         }
 
-        @keyframes subir {
+        @keyframes subirCorazon {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* Fotos flotantes */
+        @keyframes subirFoto {
             from { transform: translateY(0); opacity: 1; }
             to { transform: translateY(-100vh); opacity: 0; }
         }
     </style>
-    <script>
-    const fotos = ["foto1.jpg", "foto2.jpg"]; // poné aquí tus imágenes
-
-    setInterval(() => {
-        const img = document.createElement("img");
-        const fotoRandom = fotos[Math.floor(Math.random() * fotos.length)];
-        img.src = fotoRandom;
-
-        img.style.position = "absolute";
-        img.style.left = Math.random() * 80 + "vw"; // posición horizontal
-        img.style.bottom = "0";
-        img.style.width = (80 + Math.random() * 50) + "px"; // tamaño aleatorio
-        img.style.borderRadius = "15px";
-        img.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
-        img.style.animation = "subirFoto 8s linear forwards";
-        img.style.zIndex = "500"; // detrás del mensaje, delante del fondo
-
-        document.body.appendChild(img);
-
-        setTimeout(() => img.remove(), 8000); // eliminar después de subir
-    }, 2000); // cada 2 segundos aparece una nueva foto
-</script>
-
-<style>
-@keyframes subirFoto {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-100vh); opacity: 0; }
-}
-</style>
-
 </head>
 <body>
+
+    <!-- Música de fondo -->
+    <audio autoplay loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio.
+    </audio>
 
     <!-- Mensaje -->
     <div class="mensaje">
@@ -93,15 +75,33 @@
             const corazon = document.createElement("div");
             corazon.classList.add("corazon");
             corazon.innerText = "❤️";
-
             corazon.style.left = Math.random() * 100 + "vw";
             corazon.style.bottom = "0";
             corazon.style.fontSize = (20 + Math.random() * 30) + "px";
-
             document.body.appendChild(corazon);
-
             setTimeout(() => corazon.remove(), 5000);
         }, 300);
+    </script>
+
+    <!-- Fotos flotantes -->
+    <script>
+        const fotos = ["foto1.jpg","foto2.jpg"]; // reemplazá con tus fotos
+
+        setInterval(() => {
+            const img = document.createElement("img");
+            const fotoRandom = fotos[Math.floor(Math.random() * fotos.length)];
+            img.src = fotoRandom;
+            img.style.position = "absolute";
+            img.style.left = Math.random() * 80 + "vw";
+            img.style.bottom = "0";
+            img.style.width = (80 + Math.random() * 50) + "px";
+            img.style.borderRadius = "15px";
+            img.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
+            img.style.animation = "subirFoto 8s linear forwards";
+            img.style.zIndex = "500"; // detrás del mensaje
+            document.body.appendChild(img);
+            setTimeout(() => img.remove(), 8000);
+        }, 2000);
     </script>
 
     <!-- Mensaje letra por letra -->
@@ -121,10 +121,9 @@
             }, delay);
         }
 
-        escribirLinea(linea1, elem1, 150);  // primera línea
-        setTimeout(() => escribirLinea(linea2, elem2, 150), linea1.length * 150 + 500);  // segunda línea
+        escribirLinea(linea1, elem1, 150);
+        setTimeout(() => escribirLinea(linea2, elem2, 150), linea1.length * 150 + 500);
     </script>
 
 </body>
 </html>
-
