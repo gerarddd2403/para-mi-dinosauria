@@ -50,15 +50,31 @@
             from { transform: translateY(0); opacity: 1; }
             to { transform: translateY(-100vh); opacity: 0; }
         }
+
+        /* Botón música */
+        .btn-musica {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.8);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 10000;
+        }
     </style>
 </head>
 <body>
 
     <!-- Música de fondo -->
-    <audio autoplay loop>
-        <source src="musica.mp3.mpeg" type="audio/mpeg" />
+    <audio id="musica" loop>
+        <source src="musica.mp3" type="audio/mpeg" />
         Tu navegador no soporta audio.
     </audio>
+
+    <button class="btn-musica" onclick="iniciarMusica()">🎵 Música</button>
 
     <!-- Mensaje -->
     <div class="mensaje">
@@ -82,15 +98,17 @@
 
     <!-- Fotos flotantes -->
     <script>
-        const fotos = ["image.jpeg,
-                       "image1.jpeg,
-                       "image2.jpeg,
-                      "image3.jpeg,
-                       "image4.jpeg,
-                      "image5.jpeg,
-                       "image6.jpeg,
-                       "image7.jpeg,
-                       "image8.jpeg"]; // Poné los nombres de tus fotos aquí
+        const fotos = [
+            "image.jpeg",
+            "image1.jpeg",
+            "image2.jpeg",
+            "image3.jpeg",
+            "image4.jpeg",
+            "image5.jpeg",
+            "image6.jpeg",
+            "image7.jpeg",
+            "image8.jpeg"
+        ];
 
         setInterval(() => {
             const img = document.createElement("img");
@@ -103,7 +121,7 @@
             img.style.borderRadius = "15px";
             img.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
             img.style.animation = "subirFoto 8s linear forwards";
-            img.style.zIndex = "500"; // Detrás del mensaje
+            img.style.zIndex = "500";
             document.body.appendChild(img);
             setTimeout(() => img.remove(), 8000);
         }, 2000);
@@ -130,7 +148,13 @@
         setTimeout(() => escribirLinea(linea2, elem2, 150), linea1.length * 150 + 500);
     </script>
 
+    <!-- Script música -->
+    <script>
+        function iniciarMusica() {
+            const audio = document.getElementById("musica");
+            audio.play();
+        }
+    </script>
+
 </body>
 </html>
-
-
