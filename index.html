@@ -51,18 +51,22 @@
             to { transform: translateY(-100vh); opacity: 0; }
         }
 
-        /* Botón música */
+        /* Botón música (obligatorio en móvil) */
         .btn-musica {
             position: fixed;
             bottom: 20px;
-            right: 20px;
-            background: rgba(255,255,255,0.8);
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 30px;
             border: none;
-            border-radius: 25px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
+            background: white;
+            color: #ff5f9e;
+            font-weight: bold;
             z-index: 10000;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
     </style>
 </head>
@@ -70,11 +74,14 @@
 
     <!-- Música de fondo -->
     <audio id="musica" loop>
-        <source src="musica.mp3.mpeg" type="audio/mpeg" />
+        <source src="musica.mp3.mpeg" type="audio/mpeg">
         Tu navegador no soporta audio.
     </audio>
 
-    <button class="btn-musica" onclick="iniciarMusica()">🎵 Música</button>
+    <!-- Botón para iniciar música -->
+    <button id="btnMusica" class="btn-musica">
+        ▶️ Toca aquí mi amor ❤️
+    </button>
 
     <!-- Mensaje -->
     <div class="mensaje">
@@ -148,14 +155,16 @@
         setTimeout(() => escribirLinea(linea2, elem2, 150), linea1.length * 150 + 500);
     </script>
 
-    <!-- Script música -->
+    <!-- Script música (MÓVIL + PC) -->
     <script>
-        function iniciarMusica() {
-            const audio = document.getElementById("musica");
+        const btn = document.getElementById("btnMusica");
+        const audio = document.getElementById("musica");
+
+        btn.addEventListener("click", () => {
             audio.play();
-        }
+            btn.style.display = "none";
+        });
     </script>
 
 </body>
 </html>
-
